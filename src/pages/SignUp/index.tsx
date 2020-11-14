@@ -12,6 +12,7 @@ import { Container, Title, BackToSignIn, BackToSignInText } from './styles';
 import logoImg from '../../assets/logo.png';
 import { useNavigation } from '@react-navigation/native';
 import getValidationErrors from '../../utils/getValidationErrors';
+import api from '../../services/api';
 
 interface SignUpFormData {
   name: string;
@@ -39,8 +40,9 @@ const SignUp: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false });
 
-        // await api.post('/users', data);
-        // history.push('/');
+        await api.post('/users', data);
+        Alert.alert('Cadastro realizado', 'Você ja pode fazer login na aplicação');
+        goBack();
 
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
