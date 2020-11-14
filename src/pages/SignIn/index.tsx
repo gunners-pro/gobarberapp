@@ -7,8 +7,10 @@ import Button from '../../components/Button';
 
 import { Container, Title, ForgotPassword, ForgotPasswordText, CreateAccountButton, CreateAccountButtonText } from './styles';
 import logoImg from '../../assets/logo.png';
+import { useNavigation } from '@react-navigation/native';
 
 const SignIn: React.FC = () => {
+  const { navigate } = useNavigation();
   return (
     <>
       <KeyboardAvoidingView
@@ -38,7 +40,7 @@ const SignIn: React.FC = () => {
         </ScrollView>
       </KeyboardAvoidingView>
 
-      <CreateAccountButton onPress={() => { }}>
+      <CreateAccountButton onPress={() => navigate('SignUp')} >
         <Icon name="log-in" size={20} color="#ff9000" />
         <CreateAccountButtonText>Criar uma conta</CreateAccountButtonText>
       </CreateAccountButton>
