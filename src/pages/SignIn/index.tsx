@@ -8,6 +8,8 @@ import * as Yup from 'yup';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
+import { useAuth } from '../../hooks/auth';
+
 import { Container, Title, ForgotPassword, ForgotPasswordText, CreateAccountButton, CreateAccountButtonText } from './styles';
 import logoImg from '../../assets/logo.png';
 import { useNavigation } from '@react-navigation/native';
@@ -23,6 +25,8 @@ const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
 
+  const { signIn } = useAuth();
+
   const handleSignIn = useCallback(
     async (data: SignInFormData) => {
       try {
@@ -36,10 +40,10 @@ const SignIn: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false });
 
-        // await signIn({
-        //   email: data.email,
-        //   password: data.password,
-        // });
+        await signIn({
+          email: data.email,
+          password: data.password,
+        });
 
         // history.push('/dashboard');
       } catch (error) {
@@ -55,7 +59,7 @@ const SignIn: React.FC = () => {
         );
 
       }
-    }, []);
+    }, [signIn]);
 
   return (
     <>
