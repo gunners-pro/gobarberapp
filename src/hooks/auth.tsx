@@ -38,6 +38,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       const user = await AsyncStorage.getItem('@GoBarber:user');
 
       if (token && user) {
+        api.defaults.headers.authorization = `Bearer ${token}`;
         setData({ token, user: JSON.parse(user) });
       }
 
@@ -57,6 +58,8 @@ export const AuthProvider: React.FC = ({ children }) => {
     const { token, user } = response.data;
     await AsyncStorage.setItem('@GoBarber:token', token);
     await AsyncStorage.setItem('@GoBarber:user', JSON.stringify(user));
+
+    api.defaults.headers.authorization = `Bearer ${token}`;
 
     setData({ token, user });
   }, []);
