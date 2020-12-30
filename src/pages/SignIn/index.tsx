@@ -21,7 +21,7 @@ interface SignInFormData {
 }
 
 const SignIn: React.FC = () => {
-  const { navigate } = useNavigation();
+  const navigation = useNavigation();
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
 
@@ -113,7 +113,7 @@ const SignIn: React.FC = () => {
         </ScrollView>
       </KeyboardAvoidingView>
 
-      <CreateAccountButton onPress={() => navigate('SignUp')} >
+      <CreateAccountButton onPress={() => navigation.navigate('SignUp')} >
         <Icon name="log-in" size={20} color="#ff9000" />
         <CreateAccountButtonText>Criar uma conta</CreateAccountButtonText>
       </CreateAccountButton>
